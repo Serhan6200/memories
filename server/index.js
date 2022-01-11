@@ -5,6 +5,9 @@ import cors from "cors";
 
 const app = express();
 
+// Routes
+import postRoutes from "./routes/posts.Routes.js";
+
 app.use(express.json());
 app.use(cors());
 
@@ -20,3 +23,5 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
+
+app.use("/posts", postRoutes);
