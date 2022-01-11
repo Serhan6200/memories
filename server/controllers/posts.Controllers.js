@@ -9,6 +9,13 @@ export const getPosts = async (req, res) => {
   }
 };
 
-export const createPost = () => {
-  res.status(200).json({ message: "Create a new post route" });
+export const createPost = async (req, res) => {
+  const data = req.body;
+  const newData = new postModel(data);
+  try {
+    await newData.save();
+    return res.status(201).json({ message: "Success", data: newData });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
